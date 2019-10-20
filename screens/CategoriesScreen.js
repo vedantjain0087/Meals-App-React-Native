@@ -21,14 +21,6 @@ return (
  <FlatList keyExtractor={(item, index) => item.id} data={CATEGORIES } renderItem={renderGridItem} numColumns={2}/>
 )
 }
-
-CategoriesScreen.navigationOptions = {
-    headerTitle: 'Meal Categories',
-    headerStyle:{
-        backgroundColor: Platform.OS == 'android'? Colors.primaryColor :'white',
-    },
-    headerTintColor:Platform.OS == 'android'? "white": Colors.primaryColor
-}
 const styles = StyleSheet.create({
 screen:{
     flex:1,
