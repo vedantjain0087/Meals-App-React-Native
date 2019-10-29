@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet, Switch} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 
@@ -17,11 +17,25 @@ const FilterSwitch = props =>{
     )
 }
 const FilterScreen = props =>{
+    const {navigation} = props;
+
     const [isGlutenFree, setIsGlutenFree] = useState(false);
     const [isLactoseFree, setIsLactoseFree] = useState(false);
     const [isVegan, setIsVegan] = useState(false);
     const [isVegeterian, setIsVegeterian] = useState(false);
 
+    const saveFilters = useCallback( () => {
+        const appliedFilters = {
+            glutenFree:isGlutenFree,
+            lactoseFree:isLactoseFree,
+            vegan:isVegan,
+            Vegeterian:isVegeterian
+        }
+    }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian]);
+
+    useEffect(() => {
+        navigation.setParams({save:saveFilters})
+    },[saveFilters])
 return (
     <View style={styles.screen}>
         <Text style={styles.title}>Avaialable Filters / Restrictions</Text>
@@ -55,11 +69,16 @@ filterContainer:{
 FilterScreen.navigationOptions = (navData) => {
     return {
     headerTitle: 'Filters',
-    headerLeft: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+    headerLeft:( <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item title="Meanu" iconName='ios-menu' onPress={() => {
             navData.navigation.toggleDrawer();
         }}/>
     </HeaderButtons>
+    ),
+    headerRight:( <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="Save" iconName='ios-save' onPress={navData.navigation.getParam('save')}/>
+    </HeaderButtons>
+    )
 }
 }
 export default FilterScreen;
