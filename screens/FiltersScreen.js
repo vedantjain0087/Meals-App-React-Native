@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet, Switch} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
+import {useDispatch} from 'react-redux';
 
 import CustomHeaderButton from '../components/HeaderButton';
 import Colors from '../constants/Colors';
+import {setFilters} from '../store/actions/meals';
 
 const FilterSwitch = props =>{
     return (
@@ -24,6 +26,8 @@ const FilterScreen = props =>{
     const [isVegan, setIsVegan] = useState(false);
     const [isVegeterian, setIsVegeterian] = useState(false);
 
+    const dispatch = useDispatch();
+
     const saveFilters = useCallback( () => {
         const appliedFilters = {
             glutenFree:isGlutenFree,
@@ -31,6 +35,7 @@ const FilterScreen = props =>{
             vegan:isVegan,
             Vegeterian:isVegeterian
         }
+        dispatch(setFilters(appliedFilters))
     }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian]);
 
     useEffect(() => {
