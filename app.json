@@ -1,7 +1,11 @@
 {
   "expo": {
-    "name": "menu app",
-    "slug": "menu_App",
+    "name": "Meals App",
+    "icon": "./assets/unnamed.png",
+    "slug": "meals-app",
+    "android": {
+      "package": "com.vedant.mealsapp"
+    },
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,7 +15,6 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,10 +24,10 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
     }
   }
 }
